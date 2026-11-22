@@ -1,10 +1,10 @@
-export default function Scoreboard() {
+export default function Scoreboard({ score, highScore }) {
 
     return (
         <>
             <h1>Memory Card Game</h1>
-            <p>Score: 0</p>
-            <p>High Score: 0</p>
+            <p>Score: {score}</p>
+            <p>High Score: {highScore}</p>
         </>
     )
 }
