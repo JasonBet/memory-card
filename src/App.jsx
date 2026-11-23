@@ -19,9 +19,8 @@ function shuffleCards(list) {
 }
 
 function App() {
-
-
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const [cards, setCards] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
   const [highScore, setHighScore] = useState(0);
@@ -46,6 +45,7 @@ function App() {
       }
       catch (error) {
         console.error('Error fetching data:', error);
+        setHasError(true);
       }
       finally {
         setIsLoading(false);
@@ -73,6 +73,8 @@ function App() {
       <Scoreboard score={clickedCards.length} highScore={highScore} />
       {isLoading ? (
         <p>Loading...</p>
+      ) : hasError ? (
+        <p>Error loading cards. Please try again later.</p>
       ) : (
         <CardManager cards={cards} onCardClick={handleCardClick} />
       )}
