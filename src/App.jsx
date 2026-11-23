@@ -1,23 +1,13 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Scoreboard from './Scoreboard'
 import CardManager from './CardManager'
 
 
-const demoCards = [
-  { id: 1, image: 'image1.jpg', name: 'Card 1' },
-  { id: 2, image: 'image2.jpg', name: 'Card 2' },
-  { id: 3, image: 'image3.jpg', name: 'Card 3' },
-  { id: 4, image: 'image4.jpg', name: 'Card 4' },
-  { id: 5, image: 'image5.jpg', name: 'Card 5' },
-  { id: 6, image: 'image6.jpg', name: 'Card 6' },
-  { id: 7, image: 'image7.jpg', name: 'Card 7' },
-  { id: 8, image: 'image8.jpg', name: 'Card 8' },
-  { id: 9, image: 'image9.jpg', name: 'Card 9' },
-  { id: 10, image: 'image10.jpg', name: 'Card 10' },
-  { id: 11, image: 'image11.jpg', name: 'Card 11' },
-  { id: 12, image: 'image12.jpg', name: 'Card 12' }
-];
+const pokemonCards = [
+  'darkrai', 'dialga', 'mew', 'arceus', 'palkia', 'rayquaza', 
+  'mewtwo', 'ditto', 'dragonite', 'lucario', 'garchomp', 'gengar'
+]
 
 function shuffleCards(list) {
   const shuffledCards = [...list];
@@ -29,13 +19,40 @@ function shuffleCards(list) {
 }
 
 function App() {
-  // Hardcode 12 cards
 
 
-  const [cards, setCards] = useState(demoCards);
+  const [isLoading, setIsLoading] = useState(true);
+  const [cards, setCards] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
   const [highScore, setHighScore] = useState(0);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const responses = pokemonCards.map(async (name) => {
+          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch data for ${name}`);
+          }
+          return response.json();
+        });
+        const data = await Promise.all(responses);
+        const pokemonList = data.map((pokemon) => ({
+          id: pokemon.id,
+          image: pokemon.sprites.front_default,
+          name: pokemon.name
+        }));
+        setCards(shuffleCards(pokemonList));
+      }
+      catch (error) {
+        console.error('Error fetching data:', error);
+      }
+      finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
   // Click Handler
   const handleCardClick = (id) => {
@@ -54,7 +71,11 @@ function App() {
   return (
     <>
       <Scoreboard score={clickedCards.length} highScore={highScore} />
-      <CardManager cards={cards} onCardClick={handleCardClick} />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <CardManager cards={cards} onCardClick={handleCardClick} />
+      )}
     </>
   )
 }
