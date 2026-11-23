@@ -1,9 +1,9 @@
 export default function Card({ id, image, name, onCardClick }) {
 
     return (
-        <div onClick={() => onCardClick(id)}>
-            <img src={image} alt={`Card ${id}`} />
+        <button onClick={() => onCardClick(id)}>
+            <img src={image} alt={`Card ${name}`} />
             <p>{name}</p>
-        </div>
+        </button>
     )
 }
