@@ -1,11 +1,12 @@
 import './App.css'
+import { useState } from 'react'
 import Scoreboard from './Scoreboard'
 import CardManager from './CardManager'
 
 
 function App() {
   // Hardcode 12 cards
-  const cards = [
+  const demoCards = [
     { id: 1, image: 'image1.jpg', name: 'Card 1' },
     { id: 2, image: 'image2.jpg', name: 'Card 2' },
     { id: 3, image: 'image3.jpg', name: 'Card 3' },
@@ -20,15 +21,39 @@ function App() {
     { id: 12, image: 'image12.jpg', name: 'Card 12' }
   ];
 
-  const clickedCards = [];
+  const [cards, setCards] = useState(demoCards);
+  const [clickedCards, setClickedCards] = useState([]);
+  const [highScore, setHighScore] = useState(0);
 
+  function shuffleCards(cards) {
+    const shuffledCards = [...cards];
+    for (let i = shuffledCards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
+    }
+    return shuffledCards;
+  }
+
+
+
+  // Click Handler
+  const handleCardClick = (id) => {
+    if (clickedCards.includes(id)) {
+      setClickedCards([]);
+      setCards(shuffleCards(cards));
+    } else {
+      setClickedCards([...clickedCards, id]);
+      setHighScore(Math.max(highScore, clickedCards.length + 1));
+      setCards(shuffleCards(cards))
+    }
+  }
 
 
 
   return (
     <>
-      <Scoreboard score={clickedCards.length} highScore={0} /> 
-      <CardManager cards={cards} />
+      <Scoreboard score={clickedCards.length} highScore={highScore} /> 
+      <CardManager cards={cards} onCardClick={handleCardClick}/>
     </>
   )
 }
