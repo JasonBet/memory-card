@@ -1,12 +1,23 @@
 .card {
-    margin: 0px;
-    height: 300px;
+    margin: 10px;
+    height: 350px;
+    cursor: pointer;  
+    background-color: lightblue;
 
-    
+    border: 2px solid blue;
+    border-radius: 10px;
+}
+.card:hover {
+    box-shadow: 0 0 20px 0px red;
+    background-color: white;
+}
+.card:active {
+    box-shadow: 0 0 20px 5px red;
+    transform: translateY(4px);
 }
 .card > img {
-    width: 192px;
-    height: 192px;
+    width: 265px;
+    height: 265px;
 }
 .card > p {
     margin: 0px;

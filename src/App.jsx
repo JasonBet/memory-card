@@ -1,5 +1,5 @@
-import './App.css'
 import { useState, useEffect } from 'react'
+import './App.css'
 import Scoreboard from './Scoreboard'
 import CardManager from './CardManager'
 
