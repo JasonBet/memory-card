@@ -23,14 +23,16 @@ A Pokémon memory game built with React. Click each card only once: every new ca
 - Using state in a parent component to pass down props to children
 - Making API calls in ```useEffect``` to render when data is received
 - Using ```Promise.all()``` when waiting for responses after making a batch of API calls 
-- Implementing ```try() catch() finally()``` when making API calls
+- Implementing ```try/catch/finally``` when making API calls
 
 ## Future improvements
 - A new set of Pokémon after you click all 12
 - Difficulty levels (8 / 12 / 16 cards)
 
 ## Getting started
-```npm install```
-```npm run dev```
+```
+npm install
+npm run dev
+```
 
 Built as part of [The Odin Project](https://www.theodinproject.com/lessons/node-path-react-new-memory-card) curriculum.
