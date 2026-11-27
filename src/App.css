@@ -1,10 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     background-color: white;
+
 }
 h1 {
     color: red;
 }
 p {
-    color: blue;
+    color: red;
+    font-weight: bold;
 }

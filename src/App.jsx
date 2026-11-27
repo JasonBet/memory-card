@@ -70,6 +70,7 @@ function App() {
 
   return (
     <>
+      <h1>Memory Card Game</h1>
       <Scoreboard score={clickedCards.length} highScore={highScore} />
       {isLoading ? (
         <p>Loading...</p>
