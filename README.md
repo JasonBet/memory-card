@@ -1,16 +1,36 @@
-# React + Vite
+# Memory Card
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Pokémon memory game built with React. Click each card only once: every new card adds a point, and clicking a card twice resets your score. The cards shuffle after every click.
 
-Currently, two official plugins are available:
+**Live demo:** https://memory-card-jasonbetsargon.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Screenshot of the game](./image.png)
 
-## React Compiler
+## Features
+- Fetches 12 Pokémon from [PokéAPI](https://pokeapi.co/) on load
+- Tracks current score and best score
+- Shuffles the cards on load and after every click (Fisher–Yates)
+- Loading and error states for the API request
+- Responsive layout
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Built with
+- React 19 (hooks: `useState`, `useEffect`)
+- Vite
+- CSS (Flexbox)
+- Deployed on Vercel
 
-## Expanding the ESLint configuration
+## What I learned
+- Using state in a parent component to pass down props to children
+- Making API calls in ```useEffect``` to render when data is received
+- Using ```Promise.all()``` when waiting for responses after making a batch of API calls 
+- Implementing ```try() catch() finally()``` when making API calls
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Future improvements
+- A new set of Pokémon after you click all 12
+- Difficulty levels (8 / 12 / 16 cards)
+
+## Getting started
+```npm install```
+```npm run dev```
+
+Built as part of [The Odin Project](https://www.theodinproject.com/lessons/node-path-react-new-memory-card) curriculum.
